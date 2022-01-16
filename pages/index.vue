@@ -1,7 +1,11 @@
 <template>
     <div>
         <div v-for="home in homes" :key="home.objectID" style="float: left; margin: 10px;">
-            <home-card :home="home"></home-card>
+            <!-- note: globally disabled prefetchLinks nuxt.config
+            add prefetch to the next-link tag to enable it at an individual level -->
+            <nuxt-link :to="`/home/${home.objectID}`">
+                <home-card :home="home"/>
+            </nuxt-link>
         </div>
     </div>
 </template>
