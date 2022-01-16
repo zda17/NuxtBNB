@@ -1,5 +1,12 @@
 [
   {
+    "name": "home-id",
+    "path": "/home/:id?",
+    "component": "/Users/zachalvstad/Desktop/NuxtBNB/pages/home/_id.vue",
+    "chunkName": "pages/home/_id",
+    "_name": "_cd71a2f0"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/Users/zachalvstad/Desktop/NuxtBNB/pages/index.vue",
