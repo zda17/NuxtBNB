@@ -31,9 +31,13 @@ export default {
         return {
             title: this.home.title,
             script: [{
-                src: "https://maps.googleapis.com/maps/api/js?key={YOUR_API_KEY}&Libraries=places=initMap",
+                src: "https://maps.googleapis.com/maps/api/js?key={your_api_key}&Libraries=places&callback=initMap",
                 hid: "map",
-                defer: true
+                defer: true,
+                skip: process.client && window.mapLoaded
+            }, {
+                innerHTML: "window.initMap = function() { window.mapLoaded = true }",
+                hid: "map-init",
             }],
         }
     },
