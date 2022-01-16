@@ -12,6 +12,8 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
+import nuxt_plugin_plugin_f1c39b78 from 'nuxt_plugin_plugin_f1c39b78' // Source: ./components/plugin.js (mode: 'all')
+
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
 
@@ -60,7 +62,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"meta":[],"link":[],"style":[],"script":[]},
+    head: {"titleTemplate":"Mastering Nuxt: %s","htmlAttrs":{"Lang":"en"},"body":{"class":["my-style"]},"meta":[{"charset":"UTF-8"}],"link":[],"style":[],"script":[]},
 
     router,
     nuxt: {
@@ -173,6 +175,10 @@ async function createApp(ssrContext, config = {}) {
     }
   }
   // Plugin execution
+
+  if (typeof nuxt_plugin_plugin_f1c39b78 === 'function') {
+    await nuxt_plugin_plugin_f1c39b78(app.context, inject)
+  }
 
   // Lock enablePreview in context
   if (process.static && process.client) {

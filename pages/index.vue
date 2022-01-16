@@ -7,13 +7,22 @@
 </template>
 <script>
 import homes from '~/data/homes';
-import HomeCard from '../components/HomeCard.vue';
 
 export default {
-  components: { HomeCard },
+    head() {
+        return {
+            title: 'Homepage',
+            meta: [{
+                name: 'description',
+                content: 'this is a homepage!',
+                hid: 'description',
+            }],
+
+        }
+    },
     data() {
         return {
-            homes: homes.slice(0,3),
+            homes: homes.slice(0, 3),
         }
     },
 }
