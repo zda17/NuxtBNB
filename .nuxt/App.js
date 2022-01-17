@@ -7,8 +7,9 @@ import NuxtLoading from './components/nuxt-loading.vue'
 import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
 import _6f6c098b from '../layouts/default.vue'
+import _7164aae1 from '../layouts/errors.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_default": sanitizeComponent(_6f6c098b),"_errors": sanitizeComponent(_7164aae1) }
 
 export default {
   render (h, props) {
