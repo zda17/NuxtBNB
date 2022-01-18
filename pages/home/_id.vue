@@ -25,6 +25,12 @@
             {{ formatDate(review.date) }}<br>
             <short-text :text="review.comment" :target="150"></short-text>
         </div>
+        <br>
+        <img :src="user.image" alt=""><br>
+        {{ user.name }}<br>
+        {{ formatDate(user.joined) }}<br>
+        {{ user.reviewCount }}<br>
+        {{ user.description }}
     </div>
 </template>
 <script>
@@ -53,10 +59,16 @@ export default {
         if (!reviewResponse.ok) {
             return error({ statusCode: reviewResponse.status, message: reviewResponse.statusText });
         }
+
+        const userResponse = await $dataApi.getUserByHomeId(params.id);
+        if (!userResponse.ok) {
+            return error({ statusCode: userResponse.status, message: userResponse.statusText });
+        }
         
         return {
             home: homeResponse.json, 
             reviews: reviewResponse.json.hits,
+            user: userResponse.json.hits[0]
         }
     },
     methods: {
