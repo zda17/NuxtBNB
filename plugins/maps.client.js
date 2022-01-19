@@ -4,12 +4,13 @@ export default function(context, inject) {
 
     addScript();
     inject('maps', {
-        showMap
+        showMap,
+        makeAutoComplete,
     });
 
     function addScript() {
         const script = document.createElement('script');
-        script.src = "https://maps.googleapis.com/maps/api/js?key={your_api_key}&Libraries=places&callback=initGoogleMaps";
+        script.src ="https://maps.googleapis.com/maps/api/js?key={api_key}&libraries=places&callback=initGoogleMaps";
         script.async = true;
         window.initGoogleMaps = initGoogleMaps;
         document.head.appendChild(script);
@@ -23,6 +24,21 @@ export default function(context, inject) {
             }
         })
         waiting = [];
+    }
+
+    function makeAutoComplete(input) {
+        if (!isLoaded) {
+            waiting.push({ fn: makeAutoComplete, arguments });
+            return
+        }
+        const autoComplete = new window.google.maps.places.Autocomplete(input, { fields: ["cities"] });
+        console.log(autoComplete);
+
+        autoComplete.addListener('place_changed', () => {
+            console.log('place changed');
+            const place = autoComplete.getPlace();
+            input.dispatchEvent(new CustomEvent('changed', { detail: place }));
+        });
     }
 
     function showMap(canvas, lat, lng) {
